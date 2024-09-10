@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'amount_display.dart';
+import 'num_pad.dart';
+
 
 class BsNumKeyboard extends StatefulWidget {
   const BsNumKeyboard({super.key});
@@ -14,21 +17,31 @@ class _BsNumKeyboardState extends State<BsNumKeyboard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        numPad();
+        _showNumPad();
       },
-      child: Padding(padding: const EdgeInsets.all(18.0),
+      child: Padding(
+        padding: const EdgeInsets.all(18.0),
       child: Column(
         children: [
           const Text('Cantidad Ingresada'),
-          Text('\$ $amount',
-              style: const TextStyle(
-                fontSize: 30.0,
-                letterSpacing: 2.0,
-                fontWeight: FontWeight.bold,
-              ))
+         AmountDisplay(amount:  amount),
         ],
       ),
     ));
+  }
+
+  void _showNumPad() {
+    showModalBottomSheet(
+      barrierColor: Colors.transparent,
+      enableDrag: false,
+      isScrollControlled: true,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.0)),
+      ),
+      context: context, builder: (BuildContext context) {
+      return const NumPad();
+    });
   }
 
   void numPad() {

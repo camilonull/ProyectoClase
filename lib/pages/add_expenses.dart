@@ -16,7 +16,6 @@ class AddExpenses extends StatelessWidget {
       body: Column(
         children: [
           const BsNumKeyboard(),
-          const Padding(padding: EdgeInsets.all(40.0), child: Text('\$20.000.00')),
           Expanded(child: Container(
             width: double.infinity,
             decoration: Constants.sheetDecoration(Theme.of(context).primaryColorDark),
