@@ -4,8 +4,17 @@ import 'package:flutter/material.dart';
 class NumPadTable extends StatelessWidget {
 
   final double constraintsHeight;
+  final void Function(String) onInput;
+  final VoidCallback onDelete;
+  final VoidCallback onDecimal;
 
-  const NumPadTable({super.key, required this.constraintsHeight});
+  const NumPadTable({
+    super.key,
+     required this.constraintsHeight,
+     required this.onInput,
+     required this.onDelete,
+     required this.onDecimal,
+     });
 
   @override
   Widget build(BuildContext context) {
@@ -14,26 +23,7 @@ class NumPadTable extends StatelessWidget {
         inside: BorderSide(width: 0.1),
       ),
       children: [
-        TableRow(children: [
-          NumPadButton(label: '1', height: constraintsHeight),
-          NumPadButton(label: '2', height: constraintsHeight),
-          NumPadButton(label: '3', height: constraintsHeight),
-        ]),
-        TableRow(children: [
-          NumPadButton(label: '4', height: constraintsHeight),
-          NumPadButton(label: '5', height: constraintsHeight),
-          NumPadButton(label: '6', height: constraintsHeight),
-        ]),
-        TableRow(children: [
-          NumPadButton(label: '7', height: constraintsHeight),
-          NumPadButton(label: '8', height: constraintsHeight),
-          NumPadButton(label: '9', height: constraintsHeight),
-        ]),
-        TableRow(children: [
-          NumPadButton(label: '.', height: constraintsHeight),
-          NumPadButton(label: '0', height: constraintsHeight),
-          NumPadButton(label: '?', height: constraintsHeight),
-        ])
+        _buildRow()
       ],
     );
   }
