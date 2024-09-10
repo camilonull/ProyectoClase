@@ -1,3 +1,5 @@
+import 'package:calc_app/utils/constants.dart';
+import 'package:calc_app/widgets/add_expenses/bs_num_keyboard.dart';
 import 'package:flutter/material.dart';
 
 
@@ -9,8 +11,27 @@ class AddExpenses extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Agregar Gasto'),
+        elevation: 0.0,
       ),
-      body: const Center(child: Text('Hola Gasto'),),
+      body: Column(
+        children: [
+          const BsNumKeyboard(),
+          const Padding(padding: EdgeInsets.all(40.0), child: Text('\$20.000.00')),
+          Expanded(child: Container(
+            width: double.infinity,
+            decoration: Constants.sheetDecoration(Theme.of(context).primaryColorDark),
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Fecha 05/09/2024'),
+                Text('Seleccionar Categoria'),
+                Text('Agregar Comentario (opcional)'),
+                Expanded(child:  Center(child: Text('Boton Done'))),
+              ],
+            ),
+          ))
+        ],
+      ),
     );
   }
 }

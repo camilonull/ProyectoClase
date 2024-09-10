@@ -8,7 +8,7 @@ class PageAnimationRoutes extends PageRouteBuilder {
   PageAnimationRoutes(
       {required this.widget, required this.ejex, required this.ejey})
       : super(
-            transitionDuration: const Duration(milliseconds: 40000),
+            transitionDuration: const Duration(milliseconds: 400),
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation,
                 Animation<double> secAnimation,
