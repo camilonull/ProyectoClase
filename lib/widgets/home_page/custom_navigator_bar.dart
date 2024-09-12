@@ -2,8 +2,8 @@ import 'package:calc_app/providers/ui_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CustomNavigatorBar extends StatelessWidget {
-  const CustomNavigatorBar({super.key});
+class CustomNavigationBar extends StatelessWidget {
+  const CustomNavigationBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +16,9 @@ class CustomNavigatorBar extends StatelessWidget {
           BottomNavigationBarItem(
               label: 'Balance', icon: Icon(Icons.account_balance_outlined)),
           BottomNavigationBarItem(
-              label: 'Graficos', icon: Icon(Icons.bar_chart_outlined)),
+              label: 'Gráficos', icon: Icon(Icons.bar_chart_outlined)),
           BottomNavigationBarItem(
-              label: 'Configuracion', icon: Icon(Icons.settings)),
+              label: 'Configuración', icon: Icon(Icons.settings)),
         ]);
   }
 }

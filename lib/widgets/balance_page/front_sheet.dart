@@ -11,12 +11,12 @@ class FrontSheet extends StatelessWidget {
         (i) => Padding(
             padding: const EdgeInsets.all(10.0),
             child: Container(
-              height: 150.0,
-              decoration: Constants.sheetDecoration(Theme.of(context).primaryColorDark)))
-              );
+                height: 150.0,
+                decoration: Constants.sheetDecoration(
+                    Theme.of(context).primaryColorDark))));
     return Container(
-      height: 800.0,
-      decoration:Constants.sheetDecoration(Theme.of(context).primaryColor),
+      decoration:
+          Constants.sheetDecoration(Theme.of(context).scaffoldBackgroundColor),
       child: ListView(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class PageAnimationRoutes extends PageRouteBuilder {
   final Widget widget;
@@ -14,7 +14,7 @@ class PageAnimationRoutes extends PageRouteBuilder {
                 Animation<double> secAnimation,
                 Widget child) {
               animation =
-                  CurvedAnimation(parent: animation, curve: Curves.elasticInOut);
+                  CurvedAnimation(parent: animation, curve: Curves.easeOutBack);
               return ScaleTransition(
                 alignment: Alignment(ejex, ejey),
                 scale: animation,

@@ -1,7 +1,8 @@
+// main.dart
 import 'package:calc_app/pages/home_page.dart';
-import 'package:calc_app/providers/ui_provider.dart';
 import 'package:calc_app/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:calc_app/providers/ui_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MultiProvider(
@@ -15,10 +16,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      debugShowCheckedModeBanner: false,
       theme: appTheme,
       initialRoute: 'home',
-      routes: {'home': (_) => const HomePage(),},
+      routes: {
+        'home': (_) => const HomePage(),
+      },
     );
   }
 }

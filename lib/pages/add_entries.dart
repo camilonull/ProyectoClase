@@ -6,10 +6,9 @@ class AddEntries extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Agregar Ingreso'),
-      ),
-      body: const Center(child: Text('Hola Ingreso'),),
-    );
+        appBar: AppBar(
+          title: const Text('Agregar Ingreso'),
+        ),
+        body: const Center(child: Text('Hola Ingreso')));
   }
 }

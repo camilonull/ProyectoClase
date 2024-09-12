@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:calc_app/widgets/balance_page/back_sheet.dart';
 import 'package:calc_app/widgets/balance_page/custom_fab.dart';
 import 'package:calc_app/widgets/balance_page/front_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'dart:math';
 
 class BalancePage extends StatefulWidget {
   const BalancePage({super.key});
@@ -16,9 +15,9 @@ class BalancePage extends StatefulWidget {
 class _BalancePageState extends State<BalancePage> {
   final _scrollController = ScrollController();
   double _offset = 0;
-  double get _max => max(90 - _offset * 90, 0);
 
   final Logger _logger = Logger();
+
   void _listener() {
     setState(() {
       _offset = _scrollController.offset / 100;
@@ -40,28 +39,30 @@ class _BalancePageState extends State<BalancePage> {
     super.dispose();
   }
 
+  double get _max => max(90 - 90 * _offset, 0.0);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: const CustomFab(),
+      floatingActionButton: const CustomFAB(),
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
           const SliverAppBar(
             elevation: 0.0,
             expandedHeight: 120.0,
-            //backgroundColor: Colors.blue,
             flexibleSpace: FlexibleSpaceBar(
               background: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     '\$ 50,000.00',
-                    style: TextStyle(color: Colors.white, fontSize: 30.0),
+                    style: TextStyle(
+                        color: Colors.green, fontSize: 30.0), // Color del texto
                   ),
                   Text(
                     'Balance',
-                    style: TextStyle(color: Colors.amber, fontSize: 14.0),
+                    style: TextStyle(fontSize: 14.0), // Color del texto
                   ),
                 ],
               ),
@@ -73,8 +74,9 @@ class _BalancePageState extends State<BalancePage> {
               children: [
                 const BackSheet(),
                 Padding(
-                    padding: EdgeInsets.only(top: _max),
-                    child: const FrontSheet())
+                  padding: EdgeInsets.only(top: _max),
+                  child: const FrontSheet(),
+                )
               ],
             )
           ]))

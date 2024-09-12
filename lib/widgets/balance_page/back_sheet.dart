@@ -11,10 +11,9 @@ class BackSheet extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 13.0, bottom: 5.0),
           child: Text(name,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18.0,
                 letterSpacing: 1.5,
-                color: customColor,
               )),
         ),
         Text(amount,
@@ -36,7 +35,7 @@ class BackSheet extends StatelessWidget {
           const VerticalDivider(
             thickness: 2.0,
           ),
-          headers('Gastos', '\$20.000.00', Colors.red)
+          headers('Gastos', '\$20.000.00', Colors.red),
         ],
       ),
     );

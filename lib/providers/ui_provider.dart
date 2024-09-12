@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 class UIProvider extends ChangeNotifier {
-  
-  int buttonNavigatorBarIndex = 0;
+  int buttonNavigationBarIndex = 0;
 
-  int get bnbIndex => buttonNavigatorBarIndex;
+  int get bnbIndex => buttonNavigationBarIndex;
 
   set bnbIndex(int i) {
-    buttonNavigatorBarIndex = i;
+    buttonNavigationBarIndex = i;
     notifyListeners();
   }
 }

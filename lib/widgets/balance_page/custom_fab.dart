@@ -4,22 +4,24 @@ import 'package:calc_app/utils/page_animation_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
-class CustomFab extends StatelessWidget {
-  const CustomFab({super.key});
+class CustomFAB extends StatelessWidget {
+  const CustomFAB({super.key});
 
   @override
   Widget build(BuildContext context) {
     List<SpeedDialChild> childButtons = [];
 
     childButtons.add(SpeedDialChild(
-      backgroundColor: Colors.red,
-      child: const Icon(Icons.remove),
-      label: 'Gasto',
-      labelStyle: const TextStyle(fontSize: 18.0),
-      onTap: () {
-        Navigator.push(context, PageAnimationRoutes(widget: const AddExpenses(), ejex: 0.0, ejey: 0.0));
-      },
-    ));
+        backgroundColor: Colors.red,
+        child: const Icon(Icons.remove),
+        label: 'Gasto',
+        labelStyle: const TextStyle(fontSize: 18.0),
+        onTap: () {
+          Navigator.push(
+              context,
+              PageAnimationRoutes(
+                  widget: const AddExpenses(), ejex: 0.8, ejey: 0.8));
+        }));
 
     childButtons.add(SpeedDialChild(
         backgroundColor: Colors.green,
@@ -27,8 +29,12 @@ class CustomFab extends StatelessWidget {
         label: 'Ingreso',
         labelStyle: const TextStyle(fontSize: 18.0),
         onTap: () {
-          Navigator.push(context, PageAnimationRoutes(widget: const AddEntries(), ejex: 0.0, ejey: 0.0));
+          Navigator.push(
+              context,
+              PageAnimationRoutes(
+                  widget: const AddEntries(), ejex: 0.8, ejey: 0.8));
         }));
+
     return SpeedDial(
       icon: Icons.add,
       activeIcon: Icons.close,

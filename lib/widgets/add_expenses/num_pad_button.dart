@@ -1,3 +1,4 @@
+// num_pad_button.dart
 import 'package:flutter/material.dart';
 
 class NumPadButton extends StatelessWidget {
@@ -8,7 +9,7 @@ class NumPadButton extends StatelessWidget {
 
   const NumPadButton({
     super.key,
-    required this.label,
+    this.label,
     required this.height,
     required this.onPressed,
     this.icon,
@@ -22,11 +23,12 @@ class NumPadButton extends StatelessWidget {
       child: SizedBox(
         height: height,
         child: Center(
-          child: icon ??
-              Text(
-                label ?? '',
-                style: const TextStyle(fontSize: 35.0),
-              ),
+          child:
+              icon ?? // Si icon no es nulo, lo muestra; de lo contrario, muestra el texto
+                  Text(
+                    label ?? '',
+                    style: const TextStyle(fontSize: 35.0),
+                  ),
         ),
       ),
     );
