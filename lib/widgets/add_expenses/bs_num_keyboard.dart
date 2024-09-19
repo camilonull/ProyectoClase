@@ -1,17 +1,28 @@
+import 'package:calc_app/models/combined_model.dart';
 import 'package:calc_app/widgets/action_buttom.dart';
 import 'package:flutter/material.dart';
 import 'amount_display.dart';
 import 'num_pad.dart';
 
 class BsNumKeyboard extends StatefulWidget {
-  const BsNumKeyboard({super.key});
+  final CombinedModel cModel;
+  const BsNumKeyboard({super.key, required this.cModel});
 
   @override
   State<BsNumKeyboard> createState() => _BsNumKeyboardState();
 }
 
+
+
 class _BsNumKeyboardState extends State<BsNumKeyboard> {
   String amount = '0.00';
+
+  @override
+void initState() {
+  amount = widget.cModel.amount.toStringAsFixed(2);
+  super.initState();
+  
+}
 
   @override
   Widget build(BuildContext context) {
@@ -130,6 +141,8 @@ class _BsNumKeyboardState extends State<BsNumKeyboard> {
               '${parts[0].substring(0, 14)}.${parts.length > 1 ? parts[1] : '00'}';
         }
       }
+
+      widget.cModel.amount = double.tryParse(amount) ?? 0.00;
     });
   }
 }
