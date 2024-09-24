@@ -3,6 +3,7 @@ import 'package:calc_app/pages/home_page.dart';
 import 'package:calc_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:calc_app/providers/ui_provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MultiProvider(
@@ -16,6 +17,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('es'),
+      ],
       theme: appTheme,
       initialRoute: 'home',
       routes: {
