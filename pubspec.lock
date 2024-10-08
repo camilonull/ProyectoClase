@@ -75,6 +75,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_material_color_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_material_color_picker
+      sha256: ca1e7749d228c9155ea24bce98e647cdbffa350e6f334f6c001f841cd3d9c987
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   flutter_speed_dial:
     dependency: "direct main"
     description:
@@ -225,10 +233,10 @@ packages:
     dependency: transitive
     description:
       name: sqflite_android
-      sha256: "11821baf1d1bd3d71150d9b0d4c2e22cf680858c71add2113c919ca55cf9dc56"
+      sha256: "78f489aab276260cdd26676d2169446c7ecd3484bbd5fead4ca14f3ed4dd9ee3"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.0-1"
+    version: "2.4.0"
   sqflite_common:
     dependency: transitive
     description:
@@ -241,18 +249,18 @@ packages:
     dependency: transitive
     description:
       name: sqflite_darwin
-      sha256: "5e325c925cbd63f27e0e538aed018a40852325e590b5d83165181e492d272f9b"
+      sha256: "769733dddf94622d5541c73e4ddc6aa7b252d865285914b6fcd54a63c4b4f027"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.1-0"
+    version: "2.4.1-1"
   sqflite_platform_interface:
     dependency: transitive
     description:
       name: sqflite_platform_interface
-      sha256: b62ab81e1284341783222aefbbb44f984ebf4663d672ae10408c9a8ddab4bfb6
+      sha256: "8dd4515c7bdcae0a785b0062859336de775e8c65db81ae33dd5445f35be61920"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.0-0"
+    version: "2.4.0"
   stack_trace:
     dependency: transitive
     description:
@@ -313,10 +321,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: f652077d0bdf60abe4c1f6377448e8655008eef28f128bc023f7b5e8dfeb48fc
+      sha256: "5c5f338a667b4c644744b661f309fb8080bb94b18a7e91ef1dbd343bed00ed6d"
       url: "https://pub.dev"
     source: hosted
-    version: "14.2.4"
+    version: "14.2.5"
 sdks:
   dart: ">=3.5.0 <4.0.0"
   flutter: ">=3.24.0"

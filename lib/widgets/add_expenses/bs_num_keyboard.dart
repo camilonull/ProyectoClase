@@ -12,17 +12,15 @@ class BsNumKeyboard extends StatefulWidget {
   State<BsNumKeyboard> createState() => _BsNumKeyboardState();
 }
 
-
-
 class _BsNumKeyboardState extends State<BsNumKeyboard> {
   String amount = '0.00';
 
   @override
-void initState() {
-  amount = widget.cModel.amount.toStringAsFixed(2);
-  super.initState();
-  
-}
+  void initState() {
+    amount =
+        widget.cModel.amount.toStringAsFixed(2); // cModel.amount inicializado
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ void initState() {
         child: Column(
           children: [
             const Text('Cantidad Ingresada'),
-            AmountDisplay(amount: amount),
+            AmountDisplay(amount: amount), // Muestra la cantidad ingresada
           ],
         ),
       ),
@@ -54,7 +52,7 @@ void initState() {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            NumPad(onValueSelected: _updateAmount),
+            NumPad(onValueSelected: _updateAmount), // Muestra el NumPad
             Padding(
               padding: const EdgeInsets.only(top: 0.0, bottom: 35.0),
               child: Column(
@@ -69,10 +67,11 @@ void initState() {
                           color: Colors.red,
                           onPressed: () {
                             setState(() {
-                              amount = '0.00'; // Reinicia el amount a 0.00
+                              amount = '0.00'; // Reinicia el valor a 0.00
+                              widget.cModel.amount =
+                                  double.tryParse(amount) ?? 0.00;
                             });
-                            Navigator.pop(
-                                context); // Pasar el valor 0.00 al cerrar
+                            Navigator.pop(context);
                           },
                         ),
                       ),
@@ -84,7 +83,7 @@ void initState() {
                           color: Colors.orange,
                           onPressed: () {
                             setState(() {
-                              amount = '0.00'; // Reinicia el amount a 0.00
+                              amount = '0.00'; // Limpia el valor ingresado
                             });
                           },
                         ),
@@ -96,7 +95,8 @@ void initState() {
                           icon: Icons.check,
                           color: Colors.green,
                           onPressed: () {
-                            Navigator.pop(context, amount);
+                            Navigator.pop(
+                                context, amount); // Acepta el valor actual
                           },
                         ),
                       ),
@@ -115,33 +115,38 @@ void initState() {
     setState(() {
       if (input == 'delete') {
         if (amount.length > 1) {
-          amount = amount.substring(0, amount.length - 1);
+          amount = amount.substring(
+              0, amount.length - 1); // Elimina el último carácter
         } else {
-          amount = '0.00';
+          amount = '0.00'; // Si solo queda un dígito, reinicia el valor
         }
       } else {
         if (amount == '0.00') {
-          amount = input == '.' ? '0.' : input;
+          amount = input == '.' ? '0.' : input; // Maneja el primer input
         } else {
-          // Evitar múltiples puntos decimales
+          // Evita múltiples puntos decimales
           if (input == '.' && amount.contains('.')) return;
-          amount += input;
+          amount += input; // Añade el valor ingresado
         }
-        // Limitar a dos decimales
+
+        // Limita a dos decimales
         final parts = amount.split('.');
         if (parts.length > 1) {
           final decimalPart = parts[1];
           if (decimalPart.length > 2) {
-            amount = '${parts[0]}.${decimalPart.substring(0, 2)}';
+            amount =
+                '${parts[0]}.${decimalPart.substring(0, 2)}'; // Limita los decimales
           }
         }
-        // Limitar a 14 enteros
+
+        // Limita a 14 dígitos enteros
         if (parts[0].length > 14) {
           amount =
               '${parts[0].substring(0, 14)}.${parts.length > 1 ? parts[1] : '00'}';
         }
       }
 
+      // Asigna el valor actualizado al CombinedModel
       widget.cModel.amount = double.tryParse(amount) ?? 0.00;
     });
   }

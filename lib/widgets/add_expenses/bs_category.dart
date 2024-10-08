@@ -1,11 +1,11 @@
-
 import 'package:calc_app/models/combined_model.dart';
 import 'package:calc_app/models/features_model.dart';
 import 'package:calc_app/providers/expenses_provider.dart';
+import 'package:calc_app/utils/constants.dart';
 import 'package:calc_app/utils/utils.dart';
+import 'package:calc_app/widgets/add_expenses/category_list.dart';
 import 'package:calc_app/widgets/add_expenses/create_category.dart';
 import 'package:flutter/material.dart';
-import 'package:calc_app/widgets/add_expenses/cateogry_list.dart';
 import 'package:provider/provider.dart';
 
 class BsCategory extends StatefulWidget {
@@ -23,8 +23,8 @@ class _BsCategoryState extends State<BsCategory> {
   void initState() {
     var exProvider = context.read<ExpensesProvider>();
 
-    if (exProvider.flist.isEmpty){
-      for(FeaturesModel feature in catList) {
+    if (exProvider.flist.isEmpty) {
+      for (FeaturesModel feature in catList) {
         exProvider.addNewFeature(feature.category, feature.color, feature.icon);
       }
     }
@@ -36,6 +36,9 @@ class _BsCategoryState extends State<BsCategory> {
     final featureList = context.watch<ExpensesProvider>().flist;
     bool hasData = false;
 
+    if (widget.cModel.category != 'Selecciona Categoría') {
+      hasData = true;
+    }
     return GestureDetector(
       onTap: () {
         categorySelected(featureList);
@@ -53,8 +56,7 @@ class _BsCategoryState extends State<BsCategory> {
                     border: Border.all(
                         width: 1.7,
                         color: (hasData)
-                            // ignore: dead_code
-                            ? widget.cModel.color?.toColor()
+                            ? widget.cModel.color.toColor()
                             : Theme.of(context).dividerColor),
                     borderRadius: BorderRadius.circular(30.0)),
                 child: Center(
@@ -79,61 +81,51 @@ class _BsCategoryState extends State<BsCategory> {
 
     var widgets = [
       ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: flist.length,
-        itemBuilder: (_, i) {
-          var item = flist[i];
-          return ListTile(
-            leading: Icon(
-              item.icon.toIcon(),
-              color: item.color.toColor(),
-              size: 35.0,
-            ),
-            title: Text(item.category),
-            trailing: const Icon(Icons.arrow_forward_ios,
-            size: 20.0,),
-            onTap: () {
-              itemSelected(item.category, item.color);
-            },
-          );
-        },
-      ),
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: flist.length,
+          itemBuilder: (_, i) {
+            var item = flist[i];
+            return ListTile(
+              leading: Icon(
+                item.icon.toIcon(),
+                color: item.color.toColor(),
+                size: 35.0,
+              ),
+              title: Text(item.category),
+              trailing: const Icon(
+                Icons.arrow_forward_ios,
+                size: 20.0,
+              ),
+              onTap: () {
+                itemSelected(item.category, item.color);
+              },
+            );
+          }),
       const Divider(
         thickness: 2.0,
       ),
       ListTile(
-            leading: const Icon(
-              Icons.create_new_folder_outlined,
-              size: 35.0,
-            ),
-            title: const Text('Crear nueva categoria'),
-            trailing: const Icon(Icons.arrow_forward_ios,
-            size: 20.0,),
-            onTap: () {
-              Navigator.pop(context);
-              createNewCategory();
-            },
-      ),
+          leading: const Icon(Icons.create_new_folder_outlined, size: 35.0),
+          title: const Text('Crear nueva Categoría'),
+          trailing: const Icon(Icons.arrow_forward_ios, size: 20.0),
+          onTap: () {
+            Navigator.pop(context);
+            createNewCategory();
+          }),
       ListTile(
-             leading: const Icon(
-              Icons.edit_outlined,
-              size: 35.0,
-            ),
-            title: const Text('Administrar Categoria'),
-            trailing: const Icon(Icons.arrow_forward_ios,
-            size: 20.0,),
-            onTap: () {
-              Navigator.pop(context);
-            },
+        leading: const Icon(Icons.edit_outlined, size: 35.0),
+        title: const Text('Administrar Categoría'),
+        trailing: const Icon(Icons.arrow_forward_ios, size: 20.0),
+        onTap: () {
+          Navigator.pop(context);
+        },
       )
     ];
-
-   
-
     showModalBottomSheet(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+        isScrollControlled: true,
         context: context,
         builder: (context) {
           return SizedBox(
@@ -143,10 +135,16 @@ class _BsCategoryState extends State<BsCategory> {
             ),
           );
         });
-    
-   
   }
-    createNewCategory() {
-      showModalBottomSheet(isScrollControlled: true,isDismissible: true,context: context, builder: (context) => CreateCategory(fModel: fModel));
-    }
+
+  createNewCategory() {
+    showModalBottomSheet(
+        shape: Constants.bottomSheet(),
+        isScrollControlled: true,
+        isDismissible: true,
+        context: context,
+        builder: (context) => CreateCategory(
+              fModel: fModel,
+            ));
+  }
 }

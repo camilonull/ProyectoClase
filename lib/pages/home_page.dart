@@ -2,7 +2,7 @@ import 'package:calc_app/pages/balance_page.dart';
 import 'package:calc_app/pages/charts_page.dart';
 import 'package:calc_app/providers/expenses_provider.dart';
 import 'package:calc_app/providers/ui_provider.dart';
-import 'package:calc_app/widgets/home_page/custom_navigator_bar.dart';
+import 'package:calc_app/widgets/home_page/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class _HomePage extends StatelessWidget {
     final currentIndex = uiProvider.bnbIndex;
     switch (currentIndex) {
       case 0:
-      exProvider.getAllFeatures();
+        exProvider.getAllFeatures();
         return const BalancePage();
       case 1:
         return const ChartsPage();

@@ -13,41 +13,39 @@ class AddExpenses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CombinedModel cModel = CombinedModel();
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => {FocusScope.of(context).unfocus()},
-      child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Agregar Gasto'),
-            elevation: 0.0,
-          ),
-          body: Column(
-            children: [
-              BsNumKeyboard(cModel: cModel,),
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  decoration: Constants.sheetDecoration(
-                      Theme.of(context).primaryColorDark),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      DatePicker(cModel: cModel),
-                      BsCategory(cModel: cModel),
-                      CommentBox(cModel: cModel),
-                      Expanded(
-                          child: Center(
-                              child: GestureDetector(
-                                  onTap: () {
-                                    log(cModel.comment);
-                                  },
-                                  child: const Text('Boton done')))),
-                    ],
-                  ),
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Agregar Gasto'),
+          elevation: 0.0,
+        ),
+        body: Column(
+          children: [
+            BsNumKeyboard(cModel: cModel),
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                decoration: Constants.sheetDecoration(
+                    Theme.of(context).primaryColorDark),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    DatePicker(cModel: cModel),
+                    BsCategory(cModel: cModel),
+                    CommentBox(cModel: cModel),
+                    Expanded(
+                        child: Center(
+                            child: GestureDetector(
+                                onTap: () {
+                                  log(cModel.comment);
+                                  log(cModel.amount.toString());
+                                },
+                                child: const Text('Botón Done')))),
+                                
+                  ],
                 ),
-              )
-            ],
-          )),
-    );
+              ),
+            )
+          ],
+        ));
   }
 }
