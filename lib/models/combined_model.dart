@@ -11,7 +11,7 @@ class CombinedModel {
     this.year = 0,
     this.month = 0,
     this.day = 0,
-    this.category,
+    this.category = 'Selecciona Categoria',
     this.color,
     this.icon,
     this.comment = '',
@@ -23,7 +23,7 @@ class CombinedModel {
   int year;
   int month;
   int day;
-  String? category;
+  String category;
   String? color;
   String? icon;
   String comment;
