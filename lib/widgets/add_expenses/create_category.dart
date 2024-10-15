@@ -1,6 +1,7 @@
 import 'package:calc_app/models/features_model.dart';
 import 'package:calc_app/providers/expenses_provider.dart';
 import 'package:calc_app/utils/constants.dart';
+import 'package:calc_app/utils/icon_list.dart';
 import 'package:calc_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
@@ -130,5 +131,38 @@ class _CreateCategoryState extends State<CreateCategory> {
         });
   }
 
-  selectIcon() {}
+ selectIcon() {
+  final iconList = IconList().iconMap;
+  showModalBottomSheet(
+    context: context,
+    builder: (context) {
+      return SizedBox(
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 5, // SliverGridDelegateWithFixedCrossAxisCount
+          ),
+          itemCount: iconList.length,
+          itemBuilder: (context, i) {
+            var key = iconList.keys.elementAt(i);
+            return GestureDetector(
+              child: Icon(
+                key.toIcon(),
+                size: 30.0,
+                color: Theme.of(context).dividerColor,
+              ), // Icon
+              onTap: () {
+                setState(() {
+                  widget.fModel.icon = key;
+                  Navigator.pop(context);
+                });
+              },
+            ); // GestureDetector
+          },
+        ), // GridView.builder
+      ); // SizedBox
+    }
+  );
+}
+
+
 }

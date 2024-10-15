@@ -9,8 +9,8 @@ class FeaturesModel {
   FeaturesModel({
     this.id,
     this.category = '',
-    this.color = '#3f9bfc',
-    this.icon = 'ad_rounded',
+    this.color = '#baf748',
+    this.icon = '',
   });
 
   int? id;

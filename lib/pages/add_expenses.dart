@@ -1,4 +1,5 @@
 import 'package:calc_app/models/combined_model.dart';
+import 'package:calc_app/providers/db_features.dart';
 import 'package:calc_app/utils/constants.dart';
 import 'package:calc_app/widgets/add_expenses/bs_category.dart';
 import 'package:calc_app/widgets/add_expenses/bs_num_keyboard.dart';
@@ -40,7 +41,14 @@ class AddExpenses extends StatelessWidget {
                                   log(cModel.amount.toString());
                                 },
                                 child: const Text('Botón Done')))),
-                                
+                     /*ElevatedButton(
+                    onPressed: () async {
+                      // Llamada al método clearFeatures() para eliminar todas las características
+                      await DBFEatures.db.clearFeatures();
+                      log("Features cleared");
+                    },
+                    child: const Text('Limpiar Features'),
+                  ),     */       
                   ],
                 ),
               ),
