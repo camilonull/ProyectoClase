@@ -49,6 +49,12 @@ class DBFEatures {
     return fList;
   }
 
+  Future<int> updateFeatures(FeaturesModel features) async {
+    final db = await database;
+    final response = db.update('Features', features.toJson(), where: 'id = ?', whereArgs: [features.id]);
+    return response;
+  }
+
   Future<void> clearFeatures() async {
     final db = await database;
     await db.delete('Feature');  // Elimina todos los registros de la tabla

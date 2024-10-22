@@ -5,9 +5,7 @@ import 'package:flutter/foundation.dart';
 class ExpensesProvider extends ChangeNotifier {
   List<FeaturesModel> flist = [];
 
-  addNewFeature(String category, String color, String icon) async {
-    final newFeature =
-        FeaturesModel(category: category, color: color, icon: icon);
+  addNewFeature(FeaturesModel newFeature) async {
     final id = await DBFEatures.db.addNewFeature(newFeature);
     newFeature.id = id;
     flist.add(newFeature);
@@ -18,5 +16,10 @@ class ExpensesProvider extends ChangeNotifier {
     final response = await DBFEatures.db.getAllFeatures();
     flist = [...response];
     notifyListeners();
+  }
+
+  updateFeatures(FeaturesModel features) async {
+    await DBFEatures.db.updateFeatures(features);
+    getAllFeatures();
   }
 }

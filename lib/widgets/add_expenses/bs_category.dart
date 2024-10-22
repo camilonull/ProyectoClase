@@ -3,6 +3,7 @@ import 'package:calc_app/models/features_model.dart';
 import 'package:calc_app/providers/expenses_provider.dart';
 import 'package:calc_app/utils/constants.dart';
 import 'package:calc_app/utils/utils.dart';
+import 'package:calc_app/widgets/add_expenses/admin_category.dart';
 import 'package:calc_app/widgets/add_expenses/category_list.dart';
 import 'package:calc_app/widgets/add_expenses/create_category.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class _BsCategoryState extends State<BsCategory> {
 
     if (exProvider.flist.isEmpty) {
       for (FeaturesModel feature in catList) {
-        exProvider.addNewFeature(feature.category, feature.color, feature.icon);
+        exProvider.addNewFeature(feature);
       }
     }
     super.initState();
@@ -119,6 +120,7 @@ class _BsCategoryState extends State<BsCategory> {
         trailing: const Icon(Icons.arrow_forward_ios, size: 20.0),
         onTap: () {
           Navigator.pop(context);
+          adminCategory();
         },
       )
     ];
@@ -138,13 +140,25 @@ class _BsCategoryState extends State<BsCategory> {
   }
 
   createNewCategory() {
+    var features = FeaturesModel(
+      id: fModel.id,
+      category: fModel.category,
+      color: fModel.color,
+      icon: fModel.icon
+    );
+
+
     showModalBottomSheet(
         shape: Constants.bottomSheet(),
         isScrollControlled: true,
         isDismissible: true,
         context: context,
         builder: (context) => CreateCategory(
-              fModel: fModel,
+              fModel: features,
             ));
+  }
+
+  adminCategory() {
+    showModalBottomSheet(context: context, builder: (context) => const AdminCategory(), isDismissible: false, shape: Constants.bottomSheet()  );
   }
 }

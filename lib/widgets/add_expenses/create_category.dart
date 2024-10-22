@@ -5,6 +5,7 @@ import 'package:calc_app/utils/icon_list.dart';
 import 'package:calc_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class CreateCategory extends StatefulWidget {
@@ -16,9 +17,24 @@ class CreateCategory extends StatefulWidget {
 }
 
 class _CreateCategoryState extends State<CreateCategory> {
+  String stcCategory = "";
+  bool hasData = false;
+  
+
+  @override
+  void initState(){
+    if(widget.fModel.id != null){
+      hasData = true;
+    }
+    super.initState();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     final fList = context.watch<ExpensesProvider>().flist;
+    final exProvider = context.read<ExpensesProvider>();
     final viewInsets = MediaQuery.of(context).viewInsets.bottom;
     Iterable<FeaturesModel> contain;
     contain = fList.where((e) =>
@@ -27,14 +43,67 @@ class _CreateCategoryState extends State<CreateCategory> {
     addCategory() {
       if (contain.isNotEmpty) {
         // Ya existe la categoría
+        Fluttertoast.showToast(
+            msg: 'Ya existe esa Categoría 🤷‍♂️',
+            backgroundColor: Colors.red,
+            fontSize: 20.0,
+            gravity: ToastGravity.CENTER);
       } else if (widget.fModel.category.isNotEmpty) {
-        // Se puede guardar
+        exProvider.addNewFeature(widget.fModel);
+        Fluttertoast.showToast(
+            msg: 'Categoría creada con exito 👍',
+            backgroundColor: Colors.green,
+            fontSize: 20.0,
+            gravity: ToastGravity.CENTER);
+        Navigator.pop(context);
+      } else {
+        Fluttertoast.showToast(
+            msg: 'No olvides nombrar una categoría 🙃',
+            backgroundColor: Colors.red,
+            fontSize: 20.0,
+            gravity: ToastGravity.CENTER);
+      }
+    }
+
+    editCategory() {
+      if (widget.fModel.category.toLowerCase() == stcCategory.toLowerCase()) {
+        // Puede editar
+        exProvider.updateFeatures(widget.fModel);
+        Fluttertoast.showToast(
+            msg: 'Categoría editada 👍',
+            backgroundColor: Colors.green,
+            fontSize: 20.0,
+            gravity: ToastGravity.CENTER);
+        Navigator.pop(context);
+      } else if (contain.isNotEmpty) {
+        // Ya existe la categoría
+        Fluttertoast.showToast(
+            msg: 'Ya existe esa Categoría 🤷‍♂️',
+            backgroundColor: Colors.red,
+            fontSize: 20.0,
+            gravity: ToastGravity.CENTER);
+      } else if (widget.fModel.category.isNotEmpty) {
+        exProvider.updateFeatures(widget.fModel);
+        Fluttertoast.showToast(
+            msg: 'Categoría editada 👍',
+            backgroundColor: Colors.green,
+            fontSize: 20.0,
+            gravity: ToastGravity.CENTER);
+        Navigator.pop(context);
+        // Procede  a editar cambios
       } else {
         // Debe dar nombre a la categoría
+        Fluttertoast.showToast(
+            msg: 'No olvides nombrar una categoría 🙃',
+            backgroundColor: Colors.red,
+            fontSize: 20.0,
+            gravity: ToastGravity.CENTER);
       }
     }
 
     return SingleChildScrollView(
+      child: Padding(
+      padding: const EdgeInsets.all(12.0),
       child: Column(
         children: [
           Container(
@@ -52,6 +121,12 @@ class _CreateCategoryState extends State<CreateCategory> {
                       hintText: 'Nombra una categoría',
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0))),
+                  onChanged: (value) {
+                    setState(() {
+                      widget.fModel.category = value;
+                    });
+                  }
+                  
                 )),
           ),
           ListTile(
@@ -88,13 +163,20 @@ class _CreateCategoryState extends State<CreateCategory> {
                   child: Text('Icono'),
                 )),
           ),
-          GestureDetector(
-            onTap: () {
-              addCategory();
-            },
-            child: const Text('Done'),
-          )
+          Row(
+            children: [
+              Expanded(child: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Constants.customButton(Colors.transparent, Colors.red, 'Cancelar'),
+              )),
+               Expanded(child: GestureDetector(
+                onTap: () => {(hasData) ? editCategory() : addCategory()},
+                child: Constants.customButton(Colors.green, Colors.transparent, 'Aceptar'),
+              ))
+            ],
+          ),
         ],
+      ),
       ),
     );
   }
@@ -134,6 +216,8 @@ class _CreateCategoryState extends State<CreateCategory> {
  selectIcon() {
   final iconList = IconList().iconMap;
   showModalBottomSheet(
+    shape: Constants.bottomSheet(),
+    isDismissible: false,
     context: context,
     builder: (context) {
       return SizedBox(
@@ -163,6 +247,8 @@ class _CreateCategoryState extends State<CreateCategory> {
     }
   );
 }
+
+
 
 
 }
