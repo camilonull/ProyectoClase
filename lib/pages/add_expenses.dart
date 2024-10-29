@@ -5,6 +5,7 @@ import 'package:calc_app/widgets/add_expenses/bs_category.dart';
 import 'package:calc_app/widgets/add_expenses/bs_num_keyboard.dart';
 import 'package:calc_app/widgets/add_expenses/comment_box.dart';
 import 'package:calc_app/widgets/add_expenses/date_picker.dart';
+import 'package:calc_app/widgets/add_expenses/save_button.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer';
 
@@ -35,12 +36,7 @@ class AddExpenses extends StatelessWidget {
                     CommentBox(cModel: cModel),
                     Expanded(
                         child: Center(
-                            child: GestureDetector(
-                                onTap: () {
-                                  log(cModel.comment);
-                                  log(cModel.amount.toString());
-                                },
-                                child: const Text('Botón Done')))),
+                            child: SaveButton(cModel: cModel))),
                      /*ElevatedButton(
                     onPressed: () async {
                       // Llamada al método clearFeatures() para eliminar todas las características

@@ -72,8 +72,9 @@ class _BsCategoryState extends State<BsCategory> {
   }
 
   categorySelected(List<FeaturesModel> flist) {
-    void itemSelected(String category, String color) {
+    void itemSelected(String category, String color, int link) {
       setState(() {
+        widget.cModel.link = link;
         widget.cModel.category = category;
         widget.cModel.color = color;
         Navigator.pop(context);
@@ -99,7 +100,7 @@ class _BsCategoryState extends State<BsCategory> {
                 size: 20.0,
               ),
               onTap: () {
-                itemSelected(item.category, item.color);
+                itemSelected(item.category, item.color, item.id!);
               },
             );
           }),
